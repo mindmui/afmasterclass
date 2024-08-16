@@ -179,16 +179,28 @@ body {
 
 #add-to-linkedin {
   text-decoration: none;
-  padding: 10px 20px;
-  background-color: #0073b1;
-  color: white;
-  border-radius: 4px;
-  font-weight: bold;
+  padding: 12px 24px; /* Adjust padding for button size */
+  background-color: #220d4e; /* LinkedIn blue color */
+  color: white; /* Text color */
+  border-radius: 4px; /* Rounded corners */
+  font-weight: regular; /* Bold text */
+  font-size: 16px; /* Font size */
+  text-align: center; /* Center text */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+  border: 1px solid transparent; /* Add border for consistency */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
 #add-to-linkedin:hover {
-  background-color: #005b8a; /* Darker shade for hover effect */
+  background-color: #220d4edb; /* Darker shade for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
 }
+
+#add-to-linkedin:active {
+  background-color: #220d4e; /* Even darker shade for active state */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Restore shadow */
+}
+
 
 /* Bottom Container within the Certificate Container */
 .bottom-container {
