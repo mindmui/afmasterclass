@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .certificate-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .certificate {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 297 / 210;
+            background-color: white;
+            border: 15px solid #220d4e;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .certificate.afmc2024 {
+            background-color: white;
+        }
+        .certificate.afmc2024 .header-image {
+            width: 100%;
+            height: auto;
+        }
+        .certificate.afmc2024 .center-content {
+            background-color: white;
+            padding: 20px;
+            margin-top: -50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .certificate.afmc2024 .green-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+        .certificate.afmc2024 .award-text {
+            font-family: 'Caveat', cursive;
+            font-size: 2em;
+            color: #333;
+            margin: 20px 0;
+        }
+        .certificate.afmc2024 .recipient-name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #220d4e;
+        }
+        .certificate.afmc2024 .completion-text {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .certificate.afmc2024 .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .certificate.afmc2024 .bottom-section .logo {
+            width: 150px;
+            height: auto;
+        }
+        .certificate.afmc2024 .bottom-section .issue-date {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .linkedin-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .linkedin-button a {
+            background-color: #0077b5;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="certificate afmc2024">
+            <img src="header-image.jpg" alt="Header Image" class="header-image">
+            <div class="center-content">
+                <div class="green-badge">Certified</div>
+                <div class="award-text">This certificate is awarded to:</div>
+                <div class="recipient-name" id="recipient-name">Supavit Kruaongarjnukool</div>
+                <div class="completion-text">For having successfully graduated the AppsFlyer MasterClass</div>
+                <div class="bottom-section">
+                    <img src="logo.png" alt="Logo" class="logo">
+                    <div class="issue-date" id="issue-date">August 2024</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="linkedin-button">
+        <a href="#" id="linkedin-link">Add to LinkedIn</a>
+    </div>
+
+    <script>
+        // Simulated response from Google Scripts
+        const response = {
+            "certificate": {
+                "certificateID": "AFMC2024-000",
+                "firstname": "Supavit",
+                "lastname": "Kruaongarjnukool",
+                "issuedDate": "2024-08-19T17:00:00.000Z",
+                "theme": "AFMC2024",
+                "status": "Active",
+                "hashcertificateid": "5c9bc6846c62b68449ce0c14ba82317"
+            }
+        };
+
+        // Set the recipient name and issue date
+        document.getElementById('recipient-name').textContent = `${response.certificate.firstname} ${response.certificate.lastname}`;
+        const issueDate = new Date(response.certificate.issuedDate);
+        document.getElementById('issue-date').textContent = issueDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+        // Set the LinkedIn button link
+        document.getElementById('linkedin-link').href = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=123456&certUrl=${encodeURIComponent(window.location.href)}&certId=${response.certificate.certificateID}`;
+
+        // Apply theme styles based on the response
+        if (response.certificate.theme !== "AFMC2024") {
+            document.querySelector('.certificate').classList.remove('afmc2024');
+            document.querySelector('.certificate').classList.add('default-theme');
+        }
+    </script>
+</body>
+</html>

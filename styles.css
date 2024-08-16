@@ -3,7 +3,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', 'Arial', sans-serif; 
+}
+
+/* Specific class for Caveat font */
+.caveat-font {
+  font-family: 'Caveat', cursive; /* Apply Caveat font */
 }
 
 /* Body Styling */
@@ -14,6 +19,45 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.badge {
+  position: absolute; /* Position relative to the certificate container */
+  top: -30px; /* Adjust to place the badge slightly higher than the top of the certificate container */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center badge horizontally */
+  background-color: transparent; /* Badge background color */
+  color: white; /* Badge text color */
+  padding: 10px 20px; /* Padding inside the badge */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 18px; /* Font size for the badge text */
+  font-weight: bold; /* Make the badge text bold */
+  z-index: 2; /* Ensure it is above other elements */
+}
+
+/* Badge Image Styling */
+.badge img {
+  width: 170px; /* Set the width of the badge image */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Outer Container (Purple Border) */
+.outer-container {
+  background-color: #220d4e;
+  background-image: url('bg.png'); /* Replace with actual image path */
+  background-size: contain; /* Adjust background size to fit the container */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: bottom; /* Center the background image */
+  width: calc(100% + 40px); /* Expand width to add extra space on the sides */
+  max-width: calc(740px + 40px); /* Adjust max-width to account for extra space */
+  padding: 20px; /* Space between border and inner container */
+  box-sizing: border-box; /* Include border in width calculation */
+  position: relative; /* Make the container relative for absolute positioning inside */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-left: -20px; /* Offset to compensate for extra space on the left */
+  margin-right: -20px; /* Offset to compensate for extra space on the right */
 }
 
 /* Certificate Container */
@@ -27,7 +71,7 @@ body {
   text-align: center;
   position: relative; /* Make the container relative for absolute positioning inside */
   margin-top: 60px; /* Add space below the image */
-  border: 20px solid #2d084f; /* Purple border */
+  margin-bottom: 60px;
 }
 
 /* Image Container */
@@ -47,27 +91,50 @@ body {
   width: 150px; /* Adjust size as needed */
 }
 
-/* Badge Header */
-.badge {
-  margin-bottom: 20px;
+/* Container for textbox and image */
+.textbox-container {
+  display: flex; /* Use flexbox to align items side-by-side */
+  align-items: center; /* Align items vertically in the center */
+  justify-content: flex-start; /* Align content to the start (left) */
+  margin-bottom: 0; /* No margin below the container */
+  margin-top: 130px; /* Margin above the container */
 }
 
-.badge img {
-  width: 200px; /* Adjust size as needed */
+/* Textbox Styling */
+.textbox {
+  font-family: 'Caveat', cursive; /* Apply Caveat font */
+  font-size: 30px; /* Font size for the text */
+  color: #ffffff; /* Text color */
+  background-image: url('brush.jpg'); /* Background image */
+  background-size: contain; /* Adjust background size to fit the container */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center; /* Center the background image */
+  padding: 20px; /* Padding inside the textbox */
+  margin-right: 5px; /* Space between textbox and image */
+  border-radius: 0px; /* Rounded corners (optional) */
+  text-align: left; /* Align text to the left */
+  position: relative; /* For absolute positioning of content */
+  z-index: 2; /* Ensure it is on top of other elements */
+}
+
+/* Image Wrapper */
+.image-arrow img {
+  width: 80px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
 }
 
 /* Recipient Name */
 .recipient-name {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: bold;
-  color: #00a8e8; /* Original font color */
-  margin: 10px 0;
+  color: #4D01C2; /* Original font color */
+  margin-top: 0;  
 }
 
 /* Certificate Text */
 .certificate-text {
-  font-size: 18px;
-  color: #333; /* Original font color */
+  font-size: 22px;
+  color: #260346; /* Updated font color */
   margin: 10px 0;
 }
 
@@ -81,6 +148,9 @@ body {
 /* AppsFlyer Logo */
 .logo {
   margin-top: 20px;
+  width: 100%; /* Adjust to full width of container */
+  max-width: 141px; /* Original size */
+  height: auto; /* Maintain aspect ratio */
 }
 
 .logo img {
@@ -90,7 +160,7 @@ body {
 /* Date */
 .date {
   font-size: 16px;
-  color: #333; /* Original font color */
+  color: #260346; /* Updated font color */
   margin-top: 10px;
 }
 
@@ -120,9 +190,89 @@ body {
   background-color: #005b8a; /* Darker shade for hover effect */
 }
 
-/* Responsive Adjustments */
+/* Bottom Container within the Certificate Container */
+.bottom-container {
+  position: absolute;
+  bottom: 5px; /* Distance from the bottom of the certificate container */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between; /* Space out the logo and issue date */
+  padding: 0 20px; /* Padding on left and right */
+}
+
+/* Logo in Bottom Container */
+.bottom-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Issue Date in Bottom Container */
+.issue-date {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #260346; /* Updated font color */
+}
+
+
+/* Responsive Adjustments for Mobile */
 @media (max-width: 480px) {
+  .outer-container {
+    width: calc(100% + 20px); /* Adjust for very small screens */
+    max-width: calc(740px + 20px); /* Adjust for very small screens */
+    padding: 50px; /* Adjust padding for very small screens */
+    margin-left: -10px; /* Offset for very small screens */
+    margin-right: -10px; /* Offset for very small screens */
+  }
+
   .certificate-container {
-    padding: 10px;
-    width: 100%;
-    border: 1
+    padding: 20px; /* Further adjust padding for very small screens */
+  }
+
+  .image-container {
+    top: 20%; /* Adjust top position for smaller screens */
+    width: 90%; /* Adjust width to fit smaller screens */
+  }
+
+  .image-container img {
+    width: 100px; /* Further adjust image size for very small screens */
+  }
+
+  .textbox-container {
+    margin-top: 100px; /* Adjust margin-top for very small screens */
+  }
+
+  .textbox {
+    font-size: 15px; /* Further reduce font size for very small screens */
+    padding: 8px; /* Adjust padding for very small screens */
+  }
+
+  .recipient-name {
+    font-size: 24px; /* Further reduce font size for very small screens */
+  }
+
+  .certificate-text {
+    font-size: 14px; /* Further reduce font size for very small screens */
+  }
+
+  .date {
+    font-size: 12px; /* Further reduce font size for very small screens */
+  }
+
+  .badge img {
+    width: 120px; /* Reduce badge size for very small screens */
+  }
+
+  .bottom-container {
+    padding: 0 10px; /* Adjust padding for smaller screens */
+  }
+
+  .logo {
+    max-width: 80px; /* Adjust further for mobile screens */
+}
+
+  .issue-date {
+    font-size: 14px; /* Adjust font size for very small screens */
+  }
+}
