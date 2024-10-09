@@ -209,7 +209,7 @@ body {
   left: 0;
   right: 0;
   display: flex;
-  justify-content: space-between; /* Space out the logo and issue date */
+  justify-content: space-between; /* Space out the logo and bottom date */
   padding: 0 20px; /* Padding on left and right */
 }
 
@@ -219,8 +219,17 @@ body {
   align-items: center;
 }
 
-/* Issue Date in Bottom Container */
-.issue-date {
+/*  Date in Bottom Container */
+.bottom-date {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #260346; /* Updated font color */
+}
+
+
+/* Expirty Date */
+.expiry-date {
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -284,7 +293,7 @@ body {
     max-width: 80px; /* Adjust further for mobile screens */
 }
 
-  .issue-date {
+  .bottom-date {
     font-size: 14px; /* Adjust font size for very small screens */
   }
 }

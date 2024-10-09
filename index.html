@@ -31,6 +31,7 @@
   <!-- Outer Container -->
   <div class="outer-container">
 
+
   <div class="certificate-container">
 
     <!-- Badge Image -->
@@ -40,7 +41,6 @@
 
     <!-- Textbox with Background Image -->
     <div class="textbox-container">
-
 
       <div class="textbox">
         This certificate is awarded to:
@@ -70,8 +70,8 @@
     </a>
       </div>
     </div>
-    <div class="issue-date">
-        <p id="issue-date" class="date"></p>    </div>
+    <div class="bottom-date">
+        <p id="expired-date" class="date"></p>    </div>
   </div>
 
 
@@ -83,8 +83,6 @@
   </div>
 
   </div>
-
-
 
 
 
@@ -110,7 +108,7 @@
   const certificateID = urlParams.get('certificate');
 
   // Replace with your Google Sheets API or Web App URL
-  const googleSheetURL = `https://script.google.com/macros/s/AKfycbyda5YrbbMyXead9d1EfYkwYymhji9HgOYLbP3I4AkFvyVtNj1WwkNJdyZA7J-gnw/exec?certificate=${certificateID}`;
+  const googleSheetURL = `https://script.google.com/macros/s/AKfycbyxi3AN03bFM2Ixd8EF2cBzTEEixcVxwG8Bp0DRO7cr4vt9gcF5MKwYlS4Rk72y3WI/exec?certificate=${certificateID}`;
 
   // Fetch certificate details from Google Sheets
   fetch(googleSheetURL)
@@ -120,23 +118,49 @@
       const issueDateElement = document.getElementById('issue-date');
       const linkedinButton = document.getElementById('linkedin-button');
       const addToLinkedInLink = document.getElementById('add-to-linkedin');
+      const expiryDateElement = document.getElementById('expired-date'); //edit here
 
       if (data && data.certificate) {
-        const { certificateID, firstname, lastname, issuedDate, theme, status, hashcertificateid} = data.certificate;
+        const { certificateID, firstname, lastname, issuedDate, expiredDate, theme, status, hashcertificateid} = data.certificate;
 
+
+        console.log(issuedDate)
+        console.log(expiredDate)
         // Populate the certificate details
         recipientNameElement.textContent = `${firstname} ${lastname}`;
 
         // Extract issue month and year from the date (assume date format is YYYY-MM-DD)
         const [issueYear, issueMonth] = issuedDate.split('-');
-        const monthName = getMonthName(parseInt(issueMonth, 10));
+        // const issueMonthName = getMonthName(parseInt(issueMonth, 10));
+
+        // Check if expiredDate is defined
+        if (expiredDate) {
+            const [expiryYear, expiryMonth] = expiredDate.split('-');
+            const expiryMonthName = getMonthName(parseInt(expiryMonth, 10));
+            const expiryString = "Expired: ";
+             expiryDateElement.innerHTML = `<strong>Expired:</strong> ${expiryMonthName} ${expiryYear}`;
+        } else {
+            // Hide or clear the expiryDateElement if expiredDate is undefined
+            expiryDateElement.textContent = ""; // Optionally clear the text
+            expiryDateElement.style.display = "none"; // Optionally hide the element
+        }
 
         // Update issue date element with month name and year
-        issueDateElement.textContent = `${monthName} ${issueYear}`;
+        // issueDateElement.textContent = `${issueMonthName} ${issueYear}`;
+
+        const expiryString = "Expired: ";
+
+        expiryDateElement.textContent = `${expiryString} ${expiryMonthName} ${expiryYear}`;
+
+        
+
+
 
         // Construct the LinkedIn URL
         const certUrl = encodeURIComponent(`https://mind.in.th/afmasterclass?certificate=${hashcertificateid}`);
-        const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}`;
+        const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}&expirationYear=${expiryYear}&expirationMonth=${expiryMonth}`;
+
+        // 
 
         // Update the LinkedIn button URL
         addToLinkedInLink.href = linkedinUrl;
