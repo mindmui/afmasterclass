@@ -149,8 +149,11 @@
 
 
         // Construct the LinkedIn URL
-        const certUrl = encodeURIComponent(`https://mind.in.th/afmasterclass?certificate=${hashcertificateid}`);
-        const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}&expirationYear=${expiryYear}&expirationMonth=${expiryMonth}`;
+          
+          // Get the current URL
+          const currentUrl = window.location.href;
+          const certUrl = encodeURIComponent(`${currentUrl}?certificate=${hashcertificateid}`);
+          const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}&expirationYear=${expiryYear}&expirationMonth=${expiryMonth}`;
 
         // Update the LinkedIn button URL
         addToLinkedInLink.href = linkedinUrl;
