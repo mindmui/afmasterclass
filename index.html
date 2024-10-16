@@ -123,9 +123,6 @@
       if (data && data.certificate) {
         const { certificateID, firstname, lastname, issuedDate, expiredDate, theme, status, hashcertificateid} = data.certificate;
 
-
-        console.log(issuedDate)
-        console.log(expiredDate)
         // Populate the certificate details
         recipientNameElement.textContent = `${firstname} ${lastname}`;
 
@@ -133,34 +130,27 @@
         const [issueYear, issueMonth] = issuedDate.split('-');
         // const issueMonthName = getMonthName(parseInt(issueMonth, 10));
 
-        // Check if expiredDate is defined
-        if (expiredDate) {
-            const [expiryYear, expiryMonth] = expiredDate.split('-');
-            const expiryMonthName = getMonthName(parseInt(expiryMonth, 10));
-            const expiryString = "Expired: ";
-             expiryDateElement.innerHTML = `<strong>Expired:</strong> ${expiryMonthName} ${expiryYear}`;
-        } else {
-            // Hide or clear the expiryDateElement if expiredDate is undefined
-            expiryDateElement.textContent = ""; // Optionally clear the text
-            expiryDateElement.style.display = "none"; // Optionally hide the element
-        }
+        // Declare global variables
+        let expiryYear;
+        let expiryMonth;
 
-        // Update issue date element with month name and year
-        // issueDateElement.textContent = `${issueMonthName} ${issueYear}`;
+          // Check if expiredDate is defined
+          if (expiredDate) {
+              [expiryYear, expiryMonth] = expiredDate.split('-');
+              const expiryMonthName = getMonthName(parseInt(expiryMonth, 10));
+              const expiryString = "Expired: ";
+              expiryDateElement.innerHTML = `<strong>Expired:</strong> ${expiryMonthName} ${expiryYear}`;
 
-        const expiryString = "Expired: ";
-
-        expiryDateElement.textContent = `${expiryString} ${expiryMonthName} ${expiryYear}`;
-
-        
-
+          } else {
+              // Hide or clear the expiryDateElement if expiredDate is undefined
+              expiryDateElement.textContent = ""; // Optionally clear the text
+              expiryDateElement.style.display = "none"; // Optionally hide the element
+          }
 
 
         // Construct the LinkedIn URL
         const certUrl = encodeURIComponent(`https://mind.in.th/afmasterclass?certificate=${hashcertificateid}`);
         const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}&expirationYear=${expiryYear}&expirationMonth=${expiryMonth}`;
-
-        // 
 
         // Update the LinkedIn button URL
         addToLinkedInLink.href = linkedinUrl;
