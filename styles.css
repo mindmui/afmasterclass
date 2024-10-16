@@ -103,7 +103,7 @@ body {
 /* Textbox Styling */
 .textbox {
   font-family: 'Caveat', cursive; /* Apply Caveat font */
-  font-size: 30px; /* Font size for the text */
+  font-size: 22px; /* Font size for the text */
   color: #ffffff; /* Text color */
   background-image: url('brush.jpg'); /* Background image */
   background-size: contain; /* Adjust background size to fit the container */
@@ -242,7 +242,7 @@ body {
   .outer-container {
     width: calc(100% + 20px); /* Adjust for very small screens */
     max-width: calc(740px + 20px); /* Adjust for very small screens */
-    padding: 50px; /* Adjust padding for very small screens */
+    padding: 30px; /* Adjust padding for very small screens */
     margin-left: -10px; /* Offset for very small screens */
     margin-right: -10px; /* Offset for very small screens */
   }
@@ -265,9 +265,9 @@ body {
   }
 
   .textbox {
-    font-size: 15px; /* Further reduce font size for very small screens */
+    font-size: 12px; /* Further reduce font size for very small screens */
     padding: 8px; /* Adjust padding for very small screens */
-  }
+}
 
   .recipient-name {
     font-size: 24px; /* Further reduce font size for very small screens */
@@ -297,3 +297,5 @@ body {
     font-size: 14px; /* Adjust font size for very small screens */
   }
 }
+
+
