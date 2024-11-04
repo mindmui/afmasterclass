@@ -123,7 +123,6 @@ https://script.google.com/macros/s/AKfycbyxi3AN03bFM2Ixd8EF2cBzTEEixcVxwG8Bp0DRO
       if (data && data.certificate) {
         const { certificateID, firstname, lastname, issuedDate, eventName, theme, status, hashcertificateid} = data.certificate;
 
-        console.log(eventName)
         // Populate the certificate details
         recipientNameElement.textContent = `${firstname} ${lastname}`;
 
