@@ -130,7 +130,7 @@ https://script.google.com/macros/s/AKfycbyxi3AN03bFM2Ixd8EF2cBzTEEixcVxwG8Bp0DRO
         const [issueYear, issueMonth] = issuedDate.split('-');
         const monthName = getMonthName(parseInt(issueMonth, 10));
 
-        issueDateElement.textContent = `${monthName} ${issueYear}`;
+        issueDateElement.innerHTML = `<strong>Issue date:</strong> ${monthName} ${issueYear}`;
 
         // Construct the LinkedIn URL
           
