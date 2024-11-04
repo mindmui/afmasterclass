@@ -71,7 +71,7 @@
       </div>
     </div>
     <div class="bottom-date">
-        <p id="expired-date" class="date"></p>    </div>
+        <p id="issue-date" class="date"></p>  </div>
   </div>
 
 
@@ -108,7 +108,8 @@
   const certificateID = urlParams.get('certificate');
 
   // Replace with your Google Sheets API or Web App URL
-  const googleSheetURL = `https://script.google.com/macros/s/AKfycbyxi3AN03bFM2Ixd8EF2cBzTEEixcVxwG8Bp0DRO7cr4vt9gcF5MKwYlS4Rk72y3WI/exec?certificate=${certificateID}`;
+  const googleSheetURL = `
+https://script.google.com/macros/s/AKfycbyxi3AN03bFM2Ixd8EF2cBzTEEixcVxwG8Bp0DRO7cr4vt9gcF5MKwYlS4Rk72y3WI/exec?certificate=${certificateID}`;
 
   // Fetch certificate details from Google Sheets
   fetch(googleSheetURL)
@@ -118,42 +119,26 @@
       const issueDateElement = document.getElementById('issue-date');
       const linkedinButton = document.getElementById('linkedin-button');
       const addToLinkedInLink = document.getElementById('add-to-linkedin');
-      const expiryDateElement = document.getElementById('expired-date'); //edit here
-
+      
       if (data && data.certificate) {
-        const { certificateID, firstname, lastname, issuedDate, expiredDate, theme, status, hashcertificateid} = data.certificate;
+        const { certificateID, firstname, lastname, issuedDate, eventName, theme, status, hashcertificateid} = data.certificate;
 
+        console.log(eventName)
         // Populate the certificate details
         recipientNameElement.textContent = `${firstname} ${lastname}`;
 
         // Extract issue month and year from the date (assume date format is YYYY-MM-DD)
         const [issueYear, issueMonth] = issuedDate.split('-');
-        // const issueMonthName = getMonthName(parseInt(issueMonth, 10));
+        const monthName = getMonthName(parseInt(issueMonth, 10));
 
-        // Declare global variables
-        let expiryYear;
-        let expiryMonth;
-
-          // Check if expiredDate is defined
-          if (expiredDate) {
-              [expiryYear, expiryMonth] = expiredDate.split('-');
-              const expiryMonthName = getMonthName(parseInt(expiryMonth, 10));
-              const expiryString = "Expired: ";
-              expiryDateElement.innerHTML = `<strong>Expired:</strong> ${expiryMonthName} ${expiryYear}`;
-
-          } else {
-              // Hide or clear the expiryDateElement if expiredDate is undefined
-              expiryDateElement.textContent = ""; // Optionally clear the text
-              expiryDateElement.style.display = "none"; // Optionally hide the element
-          }
-
+        issueDateElement.textContent = `${monthName} ${issueYear}`;
 
         // Construct the LinkedIn URL
           
           // Get the current URL
           const currentUrl = window.location.href;
           const certUrl = encodeURIComponent(`${currentUrl}`);
-          const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=AppsFlyer%20MasterClass&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}&expirationYear=${expiryYear}&expirationMonth=${expiryMonth}`;
+          const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${eventName}&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}`;
 
         // Update the LinkedIn button URL
         addToLinkedInLink.href = linkedinUrl;
