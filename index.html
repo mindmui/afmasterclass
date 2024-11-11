@@ -6,7 +6,7 @@
   <title>AppsFlyer MasterClass Certificate</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/gh/mindmui/afmasterclass@main/styles.css" rel="stylesheet">
   <link rel="icon" href="favicon.svg" sizes="32x32">
 
   <!-- Google tag (gtag.js) -->
@@ -84,8 +84,6 @@
 
   </div>
 
-
-
     <div class="center-container">
         <!-- LinkedIn Button -->
         <div id="linkedin-button" style="display: none; margin-top: 20px;">
@@ -93,68 +91,9 @@
         </div>
 
     </div>
-<script>
-  // Function to convert month number to month name
-  function getMonthName(monthNumber) {
-    const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    return months[monthNumber - 1]; // Adjust for zero-based index
-  }
 
-  // Extract the certificate ID from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const certificateID = urlParams.get('certificate');
+  <script src="https://cdn.jsdelivr.net/gh/mindmui/afmasterclass@main/certificate.js"></script>
 
-  // Replace with your Google Sheets API or Web App URL
-  const googleSheetURL = `
-https://script.google.com/macros/s/AKfycbyxi3AN03bFM2Ixd8EF2cBzTEEixcVxwG8Bp0DRO7cr4vt9gcF5MKwYlS4Rk72y3WI/exec?certificate=${certificateID}`;
-
-  // Fetch certificate details from Google Sheets
-  fetch(googleSheetURL)
-    .then(response => response.json())
-    .then(data => {
-      const recipientNameElement = document.getElementById('recipient-name');
-      const issueDateElement = document.getElementById('issue-date');
-      const linkedinButton = document.getElementById('linkedin-button');
-      const addToLinkedInLink = document.getElementById('add-to-linkedin');
-      
-      if (data && data.certificate) {
-        const { certificateID, firstname, lastname, issuedDate, eventName, theme, status, hashcertificateid} = data.certificate;
-
-        // Populate the certificate details
-        recipientNameElement.textContent = `${firstname} ${lastname}`;
-
-        // Extract issue month and year from the date (assume date format is YYYY-MM-DD)
-        const [issueYear, issueMonth] = issuedDate.split('-');
-        const monthName = getMonthName(parseInt(issueMonth, 10));
-
-        issueDateElement.innerHTML = `<strong>Issue date:</strong> ${monthName} ${issueYear}`;
-
-        // Construct the LinkedIn URL
-          
-          // Get the current URL
-          const currentUrl = window.location.href;
-          const certUrl = encodeURIComponent(`${currentUrl}`);
-          const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${eventName}&organizationId=2233984&issueYear=${issueYear}&issueMonth=${issueMonth}&certUrl=${certUrl}&certId=${certificateID}`;
-
-        // Update the LinkedIn button URL
-        addToLinkedInLink.href = linkedinUrl;
-
-        // Show the LinkedIn button
-        linkedinButton.style.display = 'block';
-      } else {
-        // If no certificate is found, redirect to another website
-        // window.location.href = "https://www.appsflyer.com";
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-      // Redirect to another website in case of any error
-      // window.location.href = "https://www.appsflyer.com";
-    });
-</script>
 
 </body>
 </html>
